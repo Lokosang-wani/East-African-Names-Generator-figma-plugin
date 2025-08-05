@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>East African Names Generator</title>
+    
     <style>
         * {
             margin: 0;
@@ -344,13 +345,13 @@
                 return;
             }
 
-            // Show loading state
+            // to show loading state
             generateBtn.disabled = true;
             generateBtn.innerHTML = '<div class="spinner"></div>';
             result.classList.add('loading');
             result.className = 'result loading';
 
-            // Send message to plugin code
+            // to send Send message to plugin code
             parent.postMessage({
                 pluginMessage: {
                     type: 'generate-name',
@@ -385,7 +386,7 @@
             return countryNames[countryCode] || countryCode;
         }
 
-        // Listen for messages from plugin code
+        // Listens for messages from plugin code
         window.onmessage = (event) => {
             const msg = event.data.pluginMessage;
             
@@ -393,7 +394,7 @@
                 const generateBtn = document.getElementById('generateBtn');
                 const result = document.getElementById('result');
 
-                // Reset button state
+                // Resets button state
                 generateBtn.disabled = false;
                 generateBtn.textContent = 'Generate Name';
                 result.classList.remove('loading');
@@ -412,7 +413,7 @@
                         <div class="name-info">${genderText} • ${countryName}</div>
                     `;
 
-                    // Show status based on insertion result
+                    // Show status based on insertion result and check for input
                     if (msg.inserted) {
                         result.className = 'result success';
                         showNotification('✅ ' + msg.message, 'success');
@@ -438,7 +439,7 @@
         // Auto-focus first select
         document.getElementById('country').focus();
 
-        // Show initial instruction
+        // pop up banner to show initial instruction should dissaapear after a few
         setTimeout(() => {
             showNotification('💡 Tip: Select a text layer in Figma first for automatic replacement!', 'success');
         }, 1000);

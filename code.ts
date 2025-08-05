@@ -13,6 +13,7 @@ interface NameData {
 
 const names: NameData = {
   "south-sudan": {
+    // Scrapped the names from random facebook names
     male: [
       // Dinka names
       "Deng", "Mayik", "Mabior", "Makwei", "Akol", "Kuol", "Garang", "Ajak", "Malong", "Biar",
@@ -211,7 +212,7 @@ function generateFullName(country: string, gender: string): string {
     lastNamePool = names[country].male;
   } else if (gender === 'female') {
     firstNamePool = names[country].female;
-    // For females, last name can be male (traditional naming pattern)
+    // For females, last name can be male (traditional naming pattern hope it doesn't cause problems lol)
     lastNamePool = names[country].male;
   }
 
@@ -252,7 +253,7 @@ figma.ui.onmessage = async (msg) => {
       try {
         const textNode = selection[0] as TextNode;
         
-        // Load the font used by the text node
+        // Load the font used by the text node, it waits to learn what font is the user is using (without await you will get font node error from figma)
         await figma.loadFontAsync(textNode.fontName as FontName);
         
         textNode.characters = fullName;
@@ -264,7 +265,7 @@ figma.ui.onmessage = async (msg) => {
         message = 'Error updating text layer';
       }
     } else {
-      // No text selected - inform user to select a text layer first
+      // if No text is selected - inform user to select a text layer first (must)
       insertionSuccess = false;
       message = 'Please select a text layer first';
     }

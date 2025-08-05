@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>East African Names Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: 1E1E1E;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 320px;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 8px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            font-size: 14px;
+            color: white;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+        }
+
+        select option {
+            background: #2d3748;
+            color: white;
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        .generate-btn {
+            width: 100%;
+            background: rgba(59, 130, 246, 0.8);
+            backdrop-filter: blur(10px);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 24px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .generate-btn:hover {
+            background: rgba(59, 130, 246, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .generate-btn:active {
+            transform: translateY(0);
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .generated-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .name-info {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+
+        .placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        .instruction {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .instruction p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.4;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer p {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .heart {
+            color: #ef4444;
+            font-size: 12px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(16, 185, 129, 0.95);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            max-width: 280px;
+            text-align: center;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .notification.error {
+            background: rgba(239, 68, 68, 0.95);
+        }
+
+        .notification.warning {
+            background: rgba(245, 158, 11, 0.95);
+        }
+
+        /* Loading state */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success state */
+        .result.success {
+            border-color: rgba(16, 185, 129, 0.5);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        /* Warning state */
+        .result.warning {
+            border-color: rgba(245, 158, 11, 0.5);
+            background: rgba(245, 158, 11, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>East African Names</h1>
+            <p>Generate Authentic East African names</p>
+        </div>
+
+        <div class="instruction">
+            <p>👆 Select a text layer in Figma first, then generate a name to replace it automatically!</p>
+        </div>
+        
+        <div class="form-group">
+            <label for="country">Country</label>
+            <select id="country">
+                <option value="">Select a country</option>
+                <option value="south-sudan">🇸🇸 South Sudan</option>
+                <option value="uganda">🇺🇬 Uganda</option>
+                <option value="kenya">🇰🇪 Kenya</option>
+                <option value="tanzania">🇹🇿 Tanzania</option>
+                <option value="ethiopia">🇪🇹 Ethiopia</option>
+                <option value="eritrea">🇪🇷 Eritrea</option>
+                <option value="somalia">🇸🇴 Somalia</option>
+                <option value="rwanda">🇷🇼 Rwanda</option>
+                <option value="burundi">🇧🇮 Burundi</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender">
+                <option value="">Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="any">Any</option>
+            </select>
+        </div>
+
+        <button class="generate-btn" id="generateBtn" onclick="generateName()">
+            Generate Name
+        </button>
+
+        <div class="result" id="result">
+            <span class="placeholder">Select country and gender, then click generate</span>
+        </div>
+
+        <div class="footer">
+            <p>
+                <span class="heart">❤️</span>
+                Built with love by <strong><a href="https://x.com/lokosangwani22">Lokosang Felix</a></strong>
+            </p>
+        </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script>
+        let currentName = '';
+        let currentCountry = '';
+        let currentGender = '';
+
+        function generateName() {
+            const country = document.getElementById('country').value;
+            const gender = document.getElementById('gender').value;
+            const generateBtn = document.getElementById('generateBtn');
+            const result = document.getElementById('result');
+
+            if (!country || !gender) {
+                showNotification('Please select both country and gender', 'error');
+                return;
+            }
+
+            // Show loading state
+            generateBtn.disabled = true;
+            generateBtn.innerHTML = '<div class="spinner"></div>';
+            result.classList.add('loading');
+            result.className = 'result loading';
+
+            // Send message to plugin code
+            parent.postMessage({
+                pluginMessage: {
+                    type: 'generate-name',
+                    country: country,
+                    gender: gender
+                }
+            }, '*');
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type} show`;
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
+        }
+
+        function getCountryName(countryCode) {
+            const countryNames = {
+                'south-sudan': 'South Sudan',
+                'uganda': 'Uganda',
+                'kenya': 'Kenya',
+                'tanzania': 'Tanzania',
+                'ethiopia': 'Ethiopia',
+                'eritrea': 'Eritrea',
+                'somalia': 'Somalia',
+                'rwanda': 'Rwanda',
+                'burundi': 'Burundi'
+            };
+            return countryNames[countryCode] || countryCode;
+        }
+
+        // Listen for messages from plugin code
+        window.onmessage = (event) => {
+            const msg = event.data.pluginMessage;
+            
+            if (msg.type === 'name-generated') {
+                const generateBtn = document.getElementById('generateBtn');
+                const result = document.getElementById('result');
+
+                // Reset button state
+                generateBtn.disabled = false;
+                generateBtn.textContent = 'Generate Name';
+                result.classList.remove('loading');
+
+                if (msg.success) {
+                    currentName = msg.name;
+                    currentCountry = msg.country;
+                    currentGender = msg.gender;
+
+                    const countryName = getCountryName(msg.country);
+                    const genderText = msg.gender === 'any' ? 'Any' : 
+                                     msg.gender.charAt(0).toUpperCase() + msg.gender.slice(1);
+
+                    result.innerHTML = `
+                        <div class="generated-name">${msg.name}</div>
+                        <div class="name-info">${genderText} • ${countryName}</div>
+                    `;
+
+                    // Show status based on insertion result
+                    if (msg.inserted) {
+                        result.className = 'result success';
+                        showNotification('✅ ' + msg.message, 'success');
+                    } else {
+                        result.className = 'result warning';
+                        showNotification('⚠️ ' + msg.message, 'warning');
+                    }
+                } else {
+                    result.innerHTML = `<span class="placeholder">${msg.error}</span>`;
+                    result.className = 'result';
+                    showNotification(msg.error, 'error');
+                }
+            }
+        };
+
+        // Add keyboard support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                generateName();
+            }
+        });
+
+        // Auto-focus first select
+        document.getElementById('country').focus();
+
+        // Show initial instruction
+        setTimeout(() => {
+            showNotification('💡 Tip: Select a text layer in Figma first for automatic replacement!', 'success');
+        }, 1000);
+    </script>
+</body>
+</html>

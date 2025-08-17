@@ -39,7 +39,7 @@ const names: NameData = {
       "Nyabuoy", "Nyatut", "Nyayen", "Nyageer", "Nyakong", "Nyareth", "Nyakech", "Nyathak", "Nyagor", "Nyawech",
       "Nyakim", "Nyalat", "Nyamal", "Nyanen", "Nyapal", "Nyareal", "Nyatuach", "Nyawut", "Nyayoal", "Nyazach",
       // Bari names (Equatorian)
-       "Ipon", "Nyoka", "Poni", "Diko", "Muro", "Kiden", "Nadoki", "Hannah", "Zahara", "Hellen",
+       "Ipon", "Nyoka", "Poni", "Diko", "Muro", "Kiden", "Nadoki", "Hannah", "Zahara", "Hellen","Juan",
     ]
   },
   uganda: {

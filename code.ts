@@ -25,7 +25,7 @@ const names: NameData = {
       "Thok", "Lul", "Keah", "Riiny", "Teny", "Jal", "Jok", "Chuol", "Lat", "Nyal",
       "Riek", "Dual", "Gatkuoth", "Koang", "Lual", "Pal", "Riek", "Taban", "Yoal", "Zach",
       // Bari names (Equatorian)
-      "Wani", "Ladu", "Lokule", "Petero", "Kenyi", "Luwate", "", "Yowani", "Loro", "Pitia",
+      "Wani", "Ladu", "Lokule", "Petero", "Kenyi", "Luwate", "Yowani", "Loro", "Pitia",
       "Soro", "Lomude", "Jada", "Juron", "Lemi", "Lokosang", "Laku", "Lasu", "Morbe", "Lojung"
     ],
     female: [
